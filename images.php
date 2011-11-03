@@ -34,7 +34,11 @@ foreach($albums as $album) {
 		$a = $doc->createElement('album');
 		$a->setAttribute('name', $album['name']);
 		$a->setAttribute('modified', $album['modified']);
-						
+		
+		// Sort the images as named
+    $album['content'] = orderAsc($album['content'], 'file');
+		
+		// Loop through album files				
 		foreach($album['content'] as $image) {
 			if($image['extension'] == "txt"){
 				
@@ -50,7 +54,6 @@ foreach($albums as $album) {
 			} else {
 				$img = $doc->createElement('img');
 
-				//$img->setAttribute('path', $image['path']);
 				$img->setAttribute('src', $image['file']);
 				$img->setAttribute('width', $image['width']);
 				$img->setAttribute('height', $image['height']);

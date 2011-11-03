@@ -51,7 +51,7 @@ class Protos {
 		// If no params are passed in URL, set good defaults
 		$albQuery = ($a == NULL ? 'album[1]' : '//album[@name="'.$this->album.'"]');
 		
-		// Query XML file to find album, category, and set base nodes
+		// Query XML file to find album base node
 		$this->albumNode = $this->xpath->query($albQuery);
 	}
 	
@@ -66,6 +66,24 @@ class Protos {
 		$this->albumName = $this->albumNode->item(0)->getAttribute('name');
 		return $this->albumName;
 	}
+	
+	// Returns the description, if available, of this album
+	function getAlbumDescription(){
+		$this->albumDescription = $this->albumNode->item(0)->getAttribute('description');
+		return $this->albumDescription;
+	}
+	
+	// Returns the path to the thumbnail image, if available, of this album
+	function getAlbumThumbnail($a){
+		$this->albumThumbnail = $this->xpath->query('album[@name="'.$a.'"]/img[1]');
+		return $this->albumThumbnail;
+	}
+	
+	
+	
+	
+	
+	/*
 	
 	// Returns name of current category
 	function getCategoryName(){
@@ -108,10 +126,11 @@ class Protos {
 		$this->setImages = $this->xpath->query("img", $this->setNode->item(0));
 		return $this->setImages;
 	}
+	*/
 	
 	// Returns a path string to the parent directory of images in this set
 	function getBasePath(){
-		$this->basePath = "albums/".preg_replace('/ /', '-', $this->getAlbumName())."/".$this->getCategoryName();
+		$this->basePath = "albums/".preg_replace('/ /', '-', $this->getAlbumName());
 		return $this->basePath;
 	}
 }

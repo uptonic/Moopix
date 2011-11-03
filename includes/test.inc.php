@@ -25,10 +25,11 @@
 </head>
 
 <body>
-  <ul>
-    <!-- START album -->
-    <li><a href="?alb={ALBUM_NAME}">{ALBUM_TITLE}</a></li>
-    <!-- END album -->
-  </ul>
+  <!-- START album -->
+  <div class="album" style="width:200px;float:left;margin:10px;">
+    <h3><a href="?alb={ALBUM_NAME}">{ALBUM_TITLE}</a></h3>
+    <p>{ALBUM_DESCRIPTION}</p>
+  </div>
+  <!-- END album -->
 </body>
 </html>
