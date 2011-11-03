@@ -5,7 +5,6 @@ This page defines the photo display pages
 
 FileName:   index.php
 Author:     Uptonic
-Version:    2011.05.16
 #####################################################
 */
 
