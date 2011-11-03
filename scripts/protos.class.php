@@ -17,59 +17,43 @@ class Protos {
 	private $doc;
 	
 	private $albumNode;
-	private $categoryNode;
-	private $setNode;
 	
-    public $xpath;
+  public $xpath;
 	public $album;
-	public $category;
-	public $set;
-	public $categorySets;
 	
 	public $albums;
-  	public $albumName;
-  	public $categoryName;
-  	public $setName;
-	public $setThumbnail;
-	public $setCount;
-	public $setDescription;
+  public $albumName;
+	public $albumThumbnail;
+	public $albumCount;
+	public $albumDescription;	
+	public $albumImages;
+	
 	public $basePath;
-	
-	public $setImages;
-	
 	
 	/**
     * Protos constructor
     *
     * @param string $d filename for XML
     * @param string $a album name from URL string
-    * @param string $c category name from URL string
-    * @param string $s set name from URL string
     * @return object Protos
     */
 
-	function __construct($d=NULL, $a=NULL, $c=NULL, $s=NULL){
+	function __construct($d=NULL, $a=NULL){
 		// Convert arguments for use elsewhere in this Class
 		$this->album = $a;
-		$this->category = $c;
-		$this->set = $s;
 		
 		// Read in XML file
-        $this->doc = new DomDocument();
+    $this->doc = new DomDocument();
 		$this->doc->load($d);
 		
 		// New instance of XPath for querying the XML tree
-        $this->xpath = new DOMXPath($this->doc);
+    $this->xpath = new DOMXPath($this->doc);
 		
 		// If no params are passed in URL, set good defaults
 		$albQuery = ($a == NULL ? 'album[1]' : '//album[@name="'.$this->album.'"]');
-		$catQuery = ($c == NULL ? 'category[1]' : 'category[@name="'.$this->category.'"]');
-		$setQuery = ($s == NULL ? 'set' : 'set[@name="'.$this->set.'"]');
 		
 		// Query XML file to find album, category, and set base nodes
 		$this->albumNode = $this->xpath->query($albQuery);
-		$this->categoryNode = $this->xpath->query($catQuery, $this->albumNode->item(0));
-		$this->setNode = $this->xpath->query($setQuery, $this->categoryNode->item(0));
 	}
 	
 	// Find all albums in this gallery

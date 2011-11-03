@@ -23,7 +23,8 @@ $protos = new Protos($xmlFile, $alb);
 ---------------------------------------------------*/
 
 // Set the template file for this view
-$templateFile = ($alb == NULL ? 'includes/index.inc.php' : 'includes/album.inc.php');
+//$templateFile = ($alb == NULL ? 'includes/index.inc.php' : 'includes/album.inc.php');
+$templateFile = 'includes/test.inc.php';
 
 // New template instance
 $fxlt = new fxl_template($templateFile);
@@ -55,39 +56,41 @@ foreach($protos->getAllAlbums() as $a => $album){
 /* Build image display for this set
 ---------------------------------------------------*/
 
-// Loop through images in this set
-foreach($protos->getSetImages() as $i => $image){
-	
-	// Break images to new row if max reached
-	if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
-	
-	// Show title if available from the XML, otherwise just show the filename
-	$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
+if($environment == "production"){
+  // Loop through images in this set
+  foreach($protos->getSetImages() as $i => $image){
 
-	// Define the path to the image for display
-	$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
+  	// Break images to new row if max reached
+  	if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
 
-	// Define other image attributes
-	$fxlt_image->assign('IMAGE_TITLE', $image_title);
-	$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
-	$fxlt_image->assign('IMAGE_SRC', $image_src);
+  	// Show title if available from the XML, otherwise just show the filename
+  	$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
 
-	// Treat PDFs a little differently, loading a blank image instead
-	if($image->getAttribute('data-extension') == "pdf") {
-		$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
-	} else if($image->getAttribute('data-extension') == "mov"){
-		$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
-		$fxlt_image->assign('IMAGE_REL', 'video');
-	} else {
-		$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
-		$fxlt_image->assign('IMAGE_REL', 'lightbox');
-	}
+  	// Define the path to the image for display
+  	$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
 
-	// Append image to page
-	$fxlt->assign('image', $fxlt_image);
+  	// Define other image attributes
+  	$fxlt_image->assign('IMAGE_TITLE', $image_title);
+  	$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
+  	$fxlt_image->assign('IMAGE_SRC', $image_src);
 
-	// Clear the buffer
-  $fxlt_image->clear();
+  	// Treat PDFs a little differently, loading a blank image instead
+  	if($image->getAttribute('data-extension') == "pdf") {
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
+  	} else if($image->getAttribute('data-extension') == "mov"){
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
+  		$fxlt_image->assign('IMAGE_REL', 'video');
+  	} else {
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
+  		$fxlt_image->assign('IMAGE_REL', 'lightbox');
+  	}
+
+  	// Append image to page
+  	$fxlt->assign('image', $fxlt_image);
+
+  	// Clear the buffer
+    $fxlt_image->clear();
+  }
 }
 
 
@@ -99,7 +102,6 @@ $fxlt->assign('THIS_ALBUM_ID', $alb);
 $fxlt->assign('THIS_CATEGORY_ID', $cat);
 
 // Assign the currently-viewed album a title
-$fxlt->assign('THIS_PAGE_TITLE', cleanName($protos->getAlbumName()) ." - ". cleanName($protos->getCategoryName()));
 $fxlt->assign('THIS_ALBUM_NAME', $protos->getAlbumName());
 $fxlt->assign('THIS_ALBUM_TITLE', cleanName($protos->getAlbumName()));
 
