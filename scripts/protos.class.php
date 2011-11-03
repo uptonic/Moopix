@@ -3,9 +3,8 @@
 #####################################################
 Core gallery functions
 
-FileName:   protos.class.php
+FileName: protos.class.php
 Author:		Scott Upton, Wall Street On Demand
-Version:    2010.03.16
 #####################################################
 */
 
