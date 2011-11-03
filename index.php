@@ -55,77 +55,39 @@ foreach($protos->getAllAlbums() as $a => $album){
 /* Build image display for this set
 ---------------------------------------------------*/
 
-if($set == NULL){
-	// If no set is specified, let's build a menu showing all sets in this category
-	foreach($protos->getCategorySets() as $cs => $catSet){
-		
-		// Break sets to new row if max reached
-		if($cs%$sets_per_row == 0) { $fxlt_set->assign('SET_FIRST', ' class="first"'); }
-		
-		// Grab first thumbnail for each set
-		$t = $protos->getSetThumbnail($catSet->getAttribute('name'));
-		
-		// Define the path to the image for display
-		$thumb_src = $protos->getBasePath().'/'.$catSet->getAttribute('name').'/'.$t->item(0)->getAttribute('src');
-		
-		// Assign the name for this set
-		$fxlt_set->assign('SET_NAME', $catSet->getAttribute('name'));
-		$fxlt_set->assign('SET_MODIFIED', _ago($catSet->getAttribute('data-last-modified')));
-		$fxlt_set->assign('SET_DESCRIPTION', $catSet->getAttribute('description'));
-		$fxlt_set->assign('SET_COUNT', $protos->getSetCount($catSet->getAttribute('name')));
-		
-		// Treat PDFs a little differently, loading a blank image instead
-		if($t->item(0)->getAttribute('data-extension') == "pdf") {
-			$fxlt_set->assign('SET_THUMB_SRC', $pdf_thumb);
-		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
-			$fxlt_set->assign('SET_THUMB_SRC', $mov_thumb);
-		} else {
-			$fxlt_set->assign('SET_THUMB_SRC', resize($thumb_src, $resize_settings));
-		}
-		
-		// Append image to page
-		$fxlt->assign('set', $fxlt_set);
-
-		// Clear the buffer
-	    $fxlt_set->clear();
+// Loop through images in this set
+foreach($protos->getSetImages() as $i => $image){
 	
-	}
-} else {
-	// Loop through images in this set
-	foreach($protos->getSetImages() as $i => $image){
-		
-		// Break images to new row if max reached
-		if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
-		
-		// Show title if available from the XML, otherwise just show the filename
-		$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
-
-		// Define the path to the image for display
-		$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
-
-		// Define other image attributes
-		$fxlt_image->assign('IMAGE_TITLE', $image_title);
-		$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
-		$fxlt_image->assign('IMAGE_SRC', $image_src);
-
-		// Treat PDFs a little differently, loading a blank image instead
-		if($image->getAttribute('data-extension') == "pdf") {
-			$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
-		} else if($image->getAttribute('data-extension') == "mov"){
-			$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
-			$fxlt_image->assign('IMAGE_REL', 'video');
-		} else {
-			$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
-			$fxlt_image->assign('IMAGE_REL', 'lightbox');
-		}
-
-		// Append image to page
-		$fxlt->assign('image', $fxlt_image);
-
-		// Clear the buffer
-	    $fxlt_image->clear();
+	// Break images to new row if max reached
+	if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
 	
+	// Show title if available from the XML, otherwise just show the filename
+	$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
+
+	// Define the path to the image for display
+	$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
+
+	// Define other image attributes
+	$fxlt_image->assign('IMAGE_TITLE', $image_title);
+	$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
+	$fxlt_image->assign('IMAGE_SRC', $image_src);
+
+	// Treat PDFs a little differently, loading a blank image instead
+	if($image->getAttribute('data-extension') == "pdf") {
+		$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
+	} else if($image->getAttribute('data-extension') == "mov"){
+		$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
+		$fxlt_image->assign('IMAGE_REL', 'video');
+	} else {
+		$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
+		$fxlt_image->assign('IMAGE_REL', 'lightbox');
 	}
+
+	// Append image to page
+	$fxlt->assign('image', $fxlt_image);
+
+	// Clear the buffer
+    $fxlt_image->clear();
 }
 
 
