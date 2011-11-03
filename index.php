@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/scripts/fxl_template.inc.php');
 require_once(dirname(__FILE__).'/scripts/config.php');
 
 // new instance of Protos Class
-$protos = new Protos($xmlFile, $alb, $cat, $set);
+$protos = new Protos($xmlFile, $alb);
 
 
 /* Initialize templating engine
