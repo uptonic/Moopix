@@ -35,40 +35,78 @@ foreach($albums as $album) {
 		$a = $doc->createElement('album');
 		$a->setAttribute('name', $album['name']);
 		$a->setAttribute('modified', $album['modified']);
+	
+		// Expecting subfolders like "prototypes" and "wireframes"
+		foreach($album['content'] as $category) {
 		
-		// Sort the images so newest is first
-		$album['content'] = orderAsc($album['content'], 'file');
-		
-		foreach($album['content'] as $image) {
-			if($image['extension'] == "txt"){
-				
-				// Read in text file and use contents for description								
-				$f = $image['path'].'/'.$image['file'];
-				$fh = fopen($f, 'r');
-				$contents = fread($fh, filesize($f));
-				fclose($fh);
-				
-				// Add description attribute to this set if available
-				$a->setAttribute('description', $contents);
-				
-			} else {
-				$img = $doc->createElement('img');
+			// Ignore categories that don't contain any prototypes
+			if($category['content'] != NULL){
 
-				$img->setAttribute('src', $image['file']);
-				$img->setAttribute('width', $image['width']);
-				$img->setAttribute('height', $image['height']);
-				$img->setAttribute('title', getImageTitle($image['file']));
-				$img->setAttribute('data-extension', $image['extension']);
-				$img->setAttribute('data-last-modified', $image['modified']);
+				// New category tag
+				$c = $doc->createElement('category');
+				$c->setAttribute('name', $category['name']);
+				$c->setAttribute('modified', $category['modified']);
+				
+				// Sort the date sets so newest is first
+				$category['content'] = orderDesc($category['content'], 'name');
 
-				$a->appendChild($img);
-			}
+				// Build the list of images in each album
+				foreach($category['content'] as $set) {
+					
+					// Ignore any datefolder that doesn't contain images
+					if($set['content'] != NULL){
+						
+						// New subfolder tag
+						$g = $doc->createElement('set');
+						$g->setAttribute('name', $set['name']);
+						$g->setAttribute('modified', $set['modified']);
+						
+						// Sort the images so newest is first
+						$set['content'] = orderAsc($set['content'], 'file');
+						
+						foreach($set['content'] as $image) {
+							if($image['extension'] == "txt"){
+								
+								// Read in text file and use contents for description								
+								$f = $image['path'].'/'.$image['file'];
+								$fh = fopen($f, 'r');
+								$contents = fread($fh, filesize($f));
+								fclose($fh);
+								
+								// Add description attribute to this set if available
+								$g->setAttribute('description', $contents);
+								
+							} else {
+								$img = $doc->createElement('img');
+
+								//$img->setAttribute('path', $image['path']);
+								$img->setAttribute('src', $image['file']);
+								$img->setAttribute('width', $image['width']);
+								$img->setAttribute('height', $image['height']);
+								$img->setAttribute('title', getImageTitle($image['file']));
+								$img->setAttribute('data-extension', $image['extension']);
+								$img->setAttribute('data-last-modified', $image['modified']);
+
+								$g->appendChild($img);
+							}
+						}
+						
+						$c->appendChild($g);					
+					}
+				}
+
+				// Close the category tag
+				$a->appendChild($c);
+			}		
 		}
 		
 		// Close the album tag
 		$r->appendChild($a);
 	}
 }
+
+//header('Content-Type: text/xml');
+//echo $doc->saveXML();
 
 $doc->save("images.xml");
 header('Location: images_success.php');
