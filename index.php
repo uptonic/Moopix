@@ -87,7 +87,7 @@ foreach($protos->getSetImages() as $i => $image){
 	$fxlt->assign('image', $fxlt_image);
 
 	// Clear the buffer
-    $fxlt_image->clear();
+  $fxlt_image->clear();
 }
 
 
@@ -102,10 +102,6 @@ $fxlt->assign('THIS_CATEGORY_ID', $cat);
 $fxlt->assign('THIS_PAGE_TITLE', cleanName($protos->getAlbumName()) ." - ". cleanName($protos->getCategoryName()));
 $fxlt->assign('THIS_ALBUM_NAME', $protos->getAlbumName());
 $fxlt->assign('THIS_ALBUM_TITLE', cleanName($protos->getAlbumName()));
-$fxlt->assign('THIS_CATEGORY_NAME', $protos->getCategoryName());
-$fxlt->assign('THIS_CATEGORY_TITLE', cleanName($protos->getCategoryName()));
-$fxlt->assign('THIS_SET_NAME', $protos->getSetName());
-$fxlt->assign('THIS_SET_DESCRIPTION', $protos->getSetDescription());
 
 
 /* Display template
