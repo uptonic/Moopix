@@ -6,6 +6,9 @@
 // Set default timezone
 date_default_timezone_set("America/Denver");
 
+// Name of the site
+$site_name = "Randall Levensaler";
+
 // Thumbnail dimensions defaults
 $resize_w = 200;
 $resize_h = 150;
@@ -30,7 +33,5 @@ $xmlFile = "images.xml";
 
 // Get params from query string
 $alb = getRequestField('alb');
-$cat = getRequestField('cat');
-$set = getRequestField('set');
 
 ?>

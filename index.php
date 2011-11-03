@@ -102,7 +102,7 @@ $fxlt->assign('THIS_ALBUM_ID', $alb);
 $fxlt->assign('THIS_CATEGORY_ID', $cat);
 
 // Title element in the header
-$fxlt->assign('SITE_NAME', "Randall Levensaler");
+$fxlt->assign('SITE_NAME', cleanName($site_name));
 $fxlt->assign('PAGE_TITLE', cleanName($protos->getAlbumName()));
 
 // Assign the currently-viewed album a title
