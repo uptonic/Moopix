@@ -4,8 +4,8 @@
 This page defines the photo display pages
 
 FileName:   index.php
-Author:		Scott Upton, Wall Street On Demand
-Version:    2010.03.05
+Author:     Uptonic
+Version:    2011.05.16
 #####################################################
 */
 
@@ -86,18 +86,18 @@ if($set == NULL){
 		$t = $protos->getSetThumbnail($catSet->getAttribute('name'));
 		
 		// Define the path to the image for display
-		$thumb_src = $protos->getBasePath().'/'.$catSet->getAttribute('name').'/'.$t->item(0)->getAttribute('file');
+		$thumb_src = $protos->getBasePath().'/'.$catSet->getAttribute('name').'/'.$t->item(0)->getAttribute('src');
 		
 		// Assign the name for this set
 		$fxlt_set->assign('SET_NAME', $catSet->getAttribute('name'));
-		$fxlt_set->assign('SET_MODIFIED', _ago($catSet->getAttribute('modified')));
+		$fxlt_set->assign('SET_MODIFIED', _ago($catSet->getAttribute('data-last-modified')));
 		$fxlt_set->assign('SET_DESCRIPTION', $catSet->getAttribute('description'));
 		$fxlt_set->assign('SET_COUNT', $protos->getSetCount($catSet->getAttribute('name')));
 		
 		// Treat PDFs a little differently, loading a blank image instead
-		if($t->item(0)->getAttribute('type') == "pdf") {
+		if($t->item(0)->getAttribute('data-extension') == "pdf") {
 			$fxlt_set->assign('SET_THUMB_SRC', $pdf_thumb);
-		} else if ($t->item(0)->getAttribute('type') == "mov") {
+		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
 			$fxlt_set->assign('SET_THUMB_SRC', $mov_thumb);
 		} else {
 			$fxlt_set->assign('SET_THUMB_SRC', resize($thumb_src, $resize_settings));
@@ -118,20 +118,20 @@ if($set == NULL){
 		if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
 		
 		// Show title if available from the XML, otherwise just show the filename
-		$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('file');
+		$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
 
 		// Define the path to the image for display
-		$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('file');
+		$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
 
 		// Define other image attributes
 		$fxlt_image->assign('IMAGE_TITLE', $image_title);
-		$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('modified')));
+		$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
 		$fxlt_image->assign('IMAGE_SRC', $image_src);
 
 		// Treat PDFs a little differently, loading a blank image instead
-		if($image->getAttribute('type') == "pdf") {
+		if($image->getAttribute('data-extension') == "pdf") {
 			$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
-		} else if($image->getAttribute('type') == "mov"){
+		} else if($image->getAttribute('data-extension') == "mov"){
 			$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
 			$fxlt_image->assign('IMAGE_REL', 'video');
 		} else {

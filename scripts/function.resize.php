@@ -17,9 +17,9 @@ function resize($imagePath,$opts=null){
 	$remoteFolder = $cacheFolder.'remote/'; # path to the folder you wish to download remote images into
 	$quality = 90; # image quality to use for ImageMagick (0 - 100)
 	
-	$cache_http_minutes = 0; 	# cache downloaded http images 20 minutes
+	$cache_http_minutes = 20; 	# cache downloaded http images 20 minutes
 
-	$path_to_convert = 'convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+	$path_to_convert = '/usr/local/bin/convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
 	
 	## you shouldn't need to configure anything else beyond this point
 

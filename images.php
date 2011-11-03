@@ -4,8 +4,8 @@
 Builds XML file for a gallery based on the filesystem
 
 FileName:   images.php
-Author:		Scott Upton, UPTONIC
-Version:    2010.03.04
+Author:     Uptonic
+Version:    2011.05.16
 #####################################################
 */
 
@@ -80,12 +80,12 @@ foreach($albums as $album) {
 								$img = $doc->createElement('img');
 
 								//$img->setAttribute('path', $image['path']);
-								$img->setAttribute('file', $image['file']);
-								$img->setAttribute('title', getImageTitle($image['file']));
-								$img->setAttribute('type', $image['extension']);
+								$img->setAttribute('src', $image['file']);
 								$img->setAttribute('width', $image['width']);
 								$img->setAttribute('height', $image['height']);
-								$img->setAttribute('modified', $image['modified']);
+								$img->setAttribute('title', getImageTitle($image['file']));
+								$img->setAttribute('data-extension', $image['extension']);
+								$img->setAttribute('data-last-modified', $image['modified']);
 
 								$g->appendChild($img);
 							}

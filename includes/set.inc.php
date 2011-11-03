@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>{THIS_PAGE_TITLE} ({THIS_SET_NAME}) | WSOD Prototype Extranet</title>
+	<title>{THIS_PAGE_TITLE} ({THIS_SET_NAME}) | Gallery</title>
 	
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="imagetoolbar" content="false" />
@@ -14,13 +14,13 @@
 	<meta name="robots" content="index, follow" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 	
-	<script src="js/jquery-1.4.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery-1.4.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/protos.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
-	<script src="fancybox/jquery.fancybox-1.3.1.pack.js" type="text/javascript" charset="utf-8"></script>
+	<script src="fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript" charset="utf-8"></script>
 	
-	<link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="screen" title="no title" charset="utf-8">
-	<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" title="" charset="utf-8">
+	<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="" charset="utf-8">
 	<link rel="stylesheet" href="css/grid.css" type="text/css" media="screen" title="" charset="utf-8">
 </head>
 

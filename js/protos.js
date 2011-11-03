@@ -16,18 +16,15 @@ $(function() {
 		}
 	});
 	
-	// // Attach fancybox for all other images
-	// 	$("a[rel=video]").fancybox({
-	// 		'titlePosition'	: 'inside',
-	// 		'overlayOpacity' : 0.8,
-	// 		'overlayColor' : '#1a1a1a',
-	// 		'width' : 640,
-	// 		'height' : '480',
-	// 		'type': 'iframe',
-	// 		'titleFormat': function(title, currentArray, currentIndex, currentOpts) {
-	// 			return '<div class="pop_zoom"><a href="'+this.href+'" target="_blank">View Full-Size</a></div><span><strong>' + (currentIndex + 1) + ' of ' + currentArray.length + ':</strong> ' + this.title + '</span>';
-	// 		}
-	// 	});
+  $("#publish_images").fancybox({
+    'type'          : 'iframe',
+    'padding'       : 0,
+    'height'        : 200,
+    'width'         : 300,
+    'autoScale'     : false,
+    'transitionIn'  : 'none',
+    'transitionOut' : 'none'
+  });
 				
 	// Only load images in the viewport
 	$("img").lazyload({ 
@@ -36,7 +33,7 @@ $(function() {
 	});
 	
 	// Find all images and dim them out
-	$("li").css('opacity', 0.7);
+	$("li").css('opacity', 0.8);
 	$("div.thumb_zoom").css('opacity',0.0);
 	
 	$("li").hover(function(){

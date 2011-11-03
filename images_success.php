@@ -4,15 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
 	<title>Success!</title>
-	
 </head>
 
 <body>
 
-<h1>Well done!</h1>
-<p>&laquo; <a href="set.php">Back to Index</a></p>
+<h1 style="text-align:center;">Well done!</h1>
 
 </body>
 </html>
