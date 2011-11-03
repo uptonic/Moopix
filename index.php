@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/scripts/fxl_template.inc.php');
 require_once(dirname(__FILE__).'/scripts/config.php');
 
 // new instance of Protos Class
-$protos = new Protos($xmlFile, $alb);
+$protos = new Protos($_MOO['xml_file'], $alb);
 
 
 /* Initialize templating engine
@@ -61,7 +61,7 @@ if($environment == "production"){
   foreach($protos->getSetImages() as $i => $image){
 
   	// Break images to new row if max reached
-  	if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
+  	if($i%$_MOO['images_per_row'] == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
 
   	// Show title if available from the XML, otherwise just show the filename
   	$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
@@ -76,12 +76,12 @@ if($environment == "production"){
 
   	// Treat PDFs a little differently, loading a blank image instead
   	if($image->getAttribute('data-extension') == "pdf") {
-  		$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', $_MOO['pdf_thumb']);
   	} else if($image->getAttribute('data-extension') == "mov"){
-  		$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', $_MOO['mov_thumb']);
   		$fxlt_image->assign('IMAGE_REL', 'video');
   	} else {
-  		$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
+  		$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $_MOO['resize_settings']));
   		$fxlt_image->assign('IMAGE_REL', 'lightbox');
   	}
 
@@ -102,7 +102,7 @@ $fxlt->assign('THIS_ALBUM_ID', $alb);
 $fxlt->assign('THIS_CATEGORY_ID', $cat);
 
 // Title element in the header
-$fxlt->assign('SITE_NAME', cleanName($site_name));
+$fxlt->assign('SITE_NAME', cleanName($_MOO['site_name']));
 $fxlt->assign('PAGE_TITLE', cleanName($protos->getAlbumName()));
 
 // Assign the currently-viewed album a title

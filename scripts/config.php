@@ -6,30 +6,22 @@
 // Set default timezone
 date_default_timezone_set("America/Denver");
 
-// Name of the site
-$site_name = "Randall Levensaler";
+// Default settings
+$_MOO = array();
+$_MOO['site_name']        = "Randall Levensaler";   // Name of the site
+$_MOO['resize_w']         = 200;                    // Default thumbnail width
+$_MOO['resize_h']         = 150;                    // Default thumbnail height
+$_MOO['images_per_row']   = 4;                      // Number of thumbnails per row
+$_MOO['pdf_thumb']        = "img/thumb_pdf.gif";    // Default thumbnail image for PDF files
+$_MOO['mov_thumb']        = "img/thumb_mov.gif";    // Default thumbnail image for MOV files
+$_MOO['xml_file']         = "images.xml";           // Location of images XML file
 
-// Thumbnail dimensions defaults
-$resize_w = 200;
-$resize_h = 150;
+
+/*Do not edit below this line
+---------------------------------------------------*/
 
 // Thumbnail resize settings
-$resize_settings = array('w'=>$resize_w,'h'=>$resize_h,'crop'=>1);
-
-// Number of thumbnails per row
-$sets_per_row = 3;
-$images_per_row = 4;
-
-// Default thumbnail image for PDF & MOV files
-$pdf_thumb = "img/thumb_pdf.gif";
-$mov_thumb = "img/thumb_mov.gif";
-
-// Set data file location
-$xmlFile = "images.xml";
-
-
-/* Do not edit below this line
----------------------------------------------------*/
+$_MOO['resize_settings'] = array('w'=>$_MOO['resize_w'],'h'=>$_MOO['resize_h'],'crop'=>1);
 
 // Get params from query string
 $alb = getRequestField('alb');
