@@ -23,19 +23,17 @@ $protos = new Protos($xmlFile, $alb);
 ---------------------------------------------------*/
 
 // Set the template file for this view
-$templateFile = ($set == NULL ? 'includes/index.inc.php' : 'includes/set.inc.php');
+$templateFile = ($alb == NULL ? 'includes/index.inc.php' : 'includes/album.inc.php');
 
 // New template instance
 $fxlt = new fxl_template($templateFile);
 
 // Find template blocks
-$fxlt_album 	= $fxlt->get_block('album');
-$fxlt_category	= $fxlt_album->get_block('category');
-$fxlt_image 	= $fxlt->get_block('image');
-$fxlt_set	 	= $fxlt->get_block('set');
+$fxlt_album = $fxlt->get_block('album');
+$fxlt_image = $fxlt->get_block('image');
 
 
-/* Build listing of all albums and their categories
+/* Build listing of all albums
 ---------------------------------------------------*/
 
 // Loop through albums to build menu structure
@@ -48,26 +46,9 @@ foreach($protos->getAllAlbums() as $a => $album){
 	// If the loop album is the current one selected append class
 	($alb == $album->getAttribute('name')) ? $fxlt_album->assign('ALBUM_SELECTED', ' class="selected"') : NULL;
 	
-	// Get categories in this album
-	$categories = $protos->xpath->query("//album[".($a+1)."]/category");
-	
-	// Loop through each album category
-	foreach($categories as $c => $category){
-		
-		// If the loop category is the current one selected append class
-		($alb == $album->getAttribute('name') && $cat == $category->getAttribute('name')) ? $fxlt_category->assign('CATEGORY_SELECTED', ' class="selected"') : NULL;
-		
-		// DEfine other category attributes
-		$fxlt_category->assign('ALBUM_NAME', $album->getAttribute('name'));        
-		$fxlt_category->assign('CATEGORY_NAME', $category->getAttribute('name'));
-		$fxlt_category->assign('CATEGORY_TITLE', cleanName($category->getAttribute('name'))); // name without dashes or underscores
-        $fxlt_album->assign('category', $fxlt_category);
-        $fxlt_category->clear();
-    }
-	
 	// Append album to template and clear buffer
-    $fxlt->assign('album', $fxlt_album);
-    $fxlt_album->clear();
+  $fxlt->assign('album', $fxlt_album);
+  $fxlt_album->clear();
 }
 
 
