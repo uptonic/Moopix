@@ -67,9 +67,6 @@ foreach($albums as $album) {
 	}
 }
 
-//header('Content-Type: text/xml');
-//echo $doc->saveXML();
-
 $doc->save("images.xml");
 header('Location: images_success.php');
 ?>
