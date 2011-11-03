@@ -19,7 +19,8 @@ function resize($imagePath,$opts=null){
 	
 	$cache_http_minutes = 20; 	# cache downloaded http images 20 minutes
 
-	$path_to_convert = '/usr/local/bin/convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+	$path_to_convert = '/usr/bin/convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+	#$path_to_convert = '/usr/local/bin/convert'; # for local Mac OS X development
 	
 	## you shouldn't need to configure anything else beyond this point
 
