@@ -30,9 +30,9 @@ $templateFile = 'includes/test.inc.php';
 $fxlt = new fxl_template($templateFile);
 
 // Find template blocks
-$fxlt_menu = $fxlt->get_block('menu');
-$fxlt_album = $fxlt->get_block('album');
-$fxlt_image = $fxlt->get_block('image');
+$fxlt_menu    = $fxlt->get_block('menu');
+$fxlt_album   = $fxlt->get_block('album');
+$fxlt_image   = $fxlt->get_block('image');
 
 
 /* Build listing of all albums
@@ -81,7 +81,10 @@ if($alb == NULL){
 		}	
 		
 		// Assign the name for this set
+		$fxlt_album->assign('ALBUM_THUMB_HEIGHT', $_MOO['resize_h']);
+		$fxlt_album->assign('ALBUM_THUMB_WIDTH', $_MOO['resize_w']);
 		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
+  	$fxlt_album->assign('ALBUM_TITLE', cleanName($album->getAttribute('name')));
 		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
 		$fxlt_album->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
 		$fxlt_album->assign('ALBUM_COUNT', $protos->getAlbumCount($album->getAttribute('name')));

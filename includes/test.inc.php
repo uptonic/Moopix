@@ -45,12 +45,12 @@
 				<li{SET_FIRST}>
 					<div class="image_wrapper">
 						<div class="side_title_wrapper">
-							<h4>{ALBUM_NAME}</h4>
+							<h4>{ALBUM_TITLE}</h4>
 							<h5>{ALBUM_COUNT} items</h5>
 						</div>
 						
 						<a href="?alb={ALBUM_NAME}" title="{IMAGE_NAME}">
-						  <img src="{ALBUM_THUMB_SRC}" alt="" height="150" width="200" />
+						  <img src="{ALBUM_THUMB_SRC}" alt="" height="{ALBUM_THUMB_HEIGHT}" width="{ALBUM_THUMB_WIDTH}" />
 						</a>
 					</div>
 				</li>
