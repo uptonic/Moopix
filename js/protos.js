@@ -15,16 +15,6 @@ $(function() {
 			return '<div class="pop_zoom"><a href="'+this.href+'" target="_blank">View Full-Size</a></div><span><strong>' + (currentIndex + 1) + ' of ' + currentArray.length + ':</strong> ' + this.title + '</span>';
 		}
 	});
-	
-  $("#publish_images").fancybox({
-    'type'          : 'iframe',
-    'padding'       : 0,
-    'height'        : 200,
-    'width'         : 300,
-    'autoScale'     : false,
-    'transitionIn'  : 'none',
-    'transitionOut' : 'none'
-  });
 				
 	// Only load images in the viewport
 	$("img").lazyload({ 
@@ -32,28 +22,16 @@ $(function() {
 		effect : "fadeIn"
 	});
 	
+	/*
 	// Find all images and dim them out
-	$("li").css('opacity', 0.8);
-	$("div.thumb_zoom").css('opacity',0.0);
+	$("#albums li").css('opacity', 0.8);
 	
-	$("li").hover(function(){
+	$("#albums li").hover(function(){
 		$(this).fadeTo('fast', 1.0);
 		$("div.thumb_zoom", this).fadeTo('fast', 0.5);
 	}, function(){
 		$(this).fadeTo('fast', 0.7);
 		$("div.thumb_zoom", this).fadeTo('fast', 0.0);
 	});
-	
-	$("div.thumb_zoom").hover(function(){
-		$(this).css('opacity', 1.0);
-	}, function(){
-		$(this).css('opacity', 0.3);
-	});
-	
-	$("#jump-menu").change(function() {
-		var val = $(this).val();
-		if (val != '') {
-			location.href = val;
-		}
-	});
+	*/
 });
