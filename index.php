@@ -97,14 +97,20 @@ if($alb == NULL){
 	}
 } else {
 	// Loop through images in this set
-	foreach($protos->getSetImages() as $i => $image){
+	foreach($protos->getAlbumImages($alb) as $i => $image){
 		
 		// Break images to new row if max reached
-		if($i%$images_per_row == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
+		//if($i%$config['images_per_row'] == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
 		
 		// Show title if available from the XML, otherwise just show the filename
 		$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
-
+    
+    // Define the path to the image for display
+		$image_src =  $config['album_path'].'/'.$protos->getAlbumName().'/'.$image->getAttribute('src');
+    
+    echo $image_src."<br />";
+    
+    /*
 		// Define the path to the image for display
 		$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
 
@@ -128,8 +134,8 @@ if($alb == NULL){
 		$fxlt->assign('image', $fxlt_image);
 
 		// Clear the buffer
-	    $fxlt_image->clear();
-	
+	  $fxlt_image->clear();
+	  */
 	}
 }
 

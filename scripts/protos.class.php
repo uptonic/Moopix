@@ -85,7 +85,11 @@ class Protos {
 		return $this->albumCount->length;
 	}
 	
-	
+	// Find all images in this album
+	function getAlbumImages($a){
+		$this->albumImages = $this->xpath->query('album[@name="'.$a.'"]/img');
+		return $this->albumImages;
+	}
 	
 	
 	/*

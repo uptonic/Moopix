@@ -81,12 +81,7 @@ img { border: none; display: block; }
 }
 
 div.image_wrapper {
-	padding: 10px 10px 20px 10px;
 	position: relative;
-}
-
-ul.set_list div.image_wrapper {
-	padding: 10px;
 }
 
 div.thumb_zoom {
