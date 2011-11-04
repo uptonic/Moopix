@@ -21,7 +21,7 @@ $config['album_path']       = "albums";               // Folder where you store 
 ---------------------------------------------------*/
 
 // Thumbnail resize settings
-$config['resize_settings'] = array('w'=>$config['resize_w']);
+$config['resize_settings'] = array('w'=>$config['resize_w'],'h'=>$config['resize_h'],'crop'=>true,'canvas-color'=>"#ffffff");
 
 // Get params from query string
 $alb = getRequestField('alb');
