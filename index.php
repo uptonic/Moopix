@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/scripts/fxl_template.inc.php');
 require_once(dirname(__FILE__).'/scripts/config.php');
 
 // new instance of Protos Class
-$protos = new Protos($_MOO['xml_file'], $alb);
+$protos = new Protos($config['xml_file'], $alb);
 
 
 /* Initialize templating engine
@@ -63,26 +63,26 @@ if($alb == NULL){
 	foreach($protos->getAllAlbums() as $a => $album){
 		
 		// Break album listing to new row if max reached
-		if($a%$_MOO['images_per_row'] == 0) { $fxlt_album->assign('ALBUM_FIRST', ' class="first"'); }
+		if($a%$config['images_per_row'] == 0) { $fxlt_album->assign('ALBUM_FIRST', ' class="first"'); }
 		
 		// Grab first thumbnail for each set
 		$t = $protos->getAlbumThumbnail($album->getAttribute('name'));
 		
 		// Define the path to the image for display
-		$thumb_src = $_MOO['album_path'].'/'.$album->getAttribute('name').'/'.$t->item(0)->getAttribute('src');
+		$thumb_src = $config['album_path'].'/'.$album->getAttribute('name').'/'.$t->item(0)->getAttribute('src');
 			
 		// Treat PDFs a little differently, loading a blank image instead
 		if($t->item(0)->getAttribute('data-extension') == "pdf") {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['pdf_thumb']);
+			$fxlt_album->assign('ALBUM_THUMB_SRC', $config['pdf_thumb']);
 		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['mov_thumb']);
+			$fxlt_album->assign('ALBUM_THUMB_SRC', $config['mov_thumb']);
 		} else {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $_MOO['resize_settings']));
+			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $config['resize_settings']));
 		}	
 		
 		// Assign the name for this set
-		$fxlt_album->assign('ALBUM_THUMB_HEIGHT', $_MOO['resize_h']);
-		$fxlt_album->assign('ALBUM_THUMB_WIDTH', $_MOO['resize_w']);
+		$fxlt_album->assign('ALBUM_THUMB_HEIGHT', $config['resize_h']);
+		$fxlt_album->assign('ALBUM_THUMB_WIDTH', $config['resize_w']);
 		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
   	$fxlt_album->assign('ALBUM_TITLE', cleanName($album->getAttribute('name')));
 		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
@@ -142,7 +142,7 @@ $fxlt->assign('THIS_ALBUM_ID', $alb);
 $fxlt->assign('THIS_CATEGORY_ID', $cat);
 
 // Title element in the header
-$fxlt->assign('SITE_NAME', cleanName($_MOO['site_name']));
+$fxlt->assign('SITE_NAME', cleanName($config['site_name']));
 $fxlt->assign('PAGE_TITLE', cleanName($protos->getAlbumName()));
 
 /*
