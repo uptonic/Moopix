@@ -84,37 +84,13 @@ if($alb == NULL){
 		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
 		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
 		$fxlt_album->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
-		//$fxlt_album->assign('ALBUM_COUNT', $album->getSetCount($catSet->getAttribute('name')));
+		$fxlt_album->assign('ALBUM_COUNT', $protos->getAlbumCount($album->getAttribute('name')));
 		
 		// Append image to page
 		$fxlt->assign('album', $fxlt_album);
 
 		// Clear the buffer
 	  $fxlt_album->clear();
-		
-		/*
-		// Assign the name for this set
-		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
-		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
-		$fxlt_album->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
-		$fxlt_album->assign('ALBUM_COUNT', $album->getSetCount($catSet->getAttribute('name')));
-		
-		// Treat PDFs a little differently, loading a blank image instead
-		if($t->item(0)->getAttribute('data-extension') == "pdf") {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['pdf_thumb']);
-		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['mov_thumb']);
-		} else {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $_MOO['resize_settings']));
-		}
-		
-		// Append image to page
-		$fxlt->assign('album', $fxlt_album);
-
-		// Clear the buffer
-	  $fxlt_album->clear();
-	  */
-	
 	}
 } else {
 	// Loop through images in this set

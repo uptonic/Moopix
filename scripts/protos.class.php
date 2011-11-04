@@ -79,6 +79,11 @@ class Protos {
 		return $this->albumThumbnail;
 	}
 	
+	// Returns the number of image items in the supplied album
+	function getAlbumCount($a){
+		$this->albumCount = $this->xpath->query('album[@name="'.$a.'"]/img');
+		return $this->albumCount->length;
+	}
 	
 	
 	
