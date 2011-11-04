@@ -30,6 +30,7 @@ $templateFile = 'includes/test.inc.php';
 $fxlt = new fxl_template($templateFile);
 
 // Find template blocks
+$fxlt_menu = $fxlt->get_block('menu');
 $fxlt_album = $fxlt->get_block('album');
 $fxlt_image = $fxlt->get_block('image');
 
@@ -41,16 +42,16 @@ $fxlt_image = $fxlt->get_block('image');
 foreach($protos->getAllAlbums() as $a => $album){
     
 	// Set album name & ID
-	$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
-	$fxlt_album->assign('ALBUM_TITLE', cleanName($album->getAttribute('name'))); // name without dashes or underscores
-	$fxlt_album->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
+	$fxlt_menu->assign('ALBUM_NAME', $album->getAttribute('name'));
+	$fxlt_menu->assign('ALBUM_TITLE', cleanName($album->getAttribute('name'))); // name without dashes or underscores
+	$fxlt_menu->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
 
 	// If the loop album is the current one selected append class
-	($alb == $album->getAttribute('name')) ? $fxlt_album->assign('ALBUM_SELECTED', ' class="selected"') : NULL;
+	($alb == $album->getAttribute('name')) ? $fxlt_menu->assign('ALBUM_SELECTED', ' class="selected"') : NULL;
 	
-	// Append album to template and clear buffer
-  $fxlt->assign('album', $fxlt_album);
-  $fxlt_album->clear();
+	// Append menu to template and clear buffer
+  $fxlt->assign('menu', $fxlt_menu);
+  $fxlt_menu->clear();
 }
 
 
@@ -68,9 +69,28 @@ if($alb == NULL){
 		$t = $protos->getAlbumThumbnail($album->getAttribute('name'));
 		
 		// Define the path to the image for display
-		$thumb_src = $protos->getBasePath().'/'.$t->item(0)->getAttribute('src');
+		$thumb_src = $_MOO['album_path'].'/'.$album->getAttribute('name').'/'.$t->item(0)->getAttribute('src');
+			
+		// Treat PDFs a little differently, loading a blank image instead
+		if($t->item(0)->getAttribute('data-extension') == "pdf") {
+			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['pdf_thumb']);
+		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
+			$fxlt_album->assign('ALBUM_THUMB_SRC', $_MOO['mov_thumb']);
+		} else {
+			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $_MOO['resize_settings']));
+		}	
 		
-		echo($thumb_src."<br />");
+		// Assign the name for this set
+		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
+		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
+		$fxlt_album->assign('ALBUM_DESCRIPTION', $album->getAttribute('description'));
+		//$fxlt_album->assign('ALBUM_COUNT', $album->getSetCount($catSet->getAttribute('name')));
+		
+		// Append image to page
+		$fxlt->assign('album', $fxlt_album);
+
+		// Clear the buffer
+	  $fxlt_album->clear();
 		
 		/*
 		// Assign the name for this set
@@ -146,10 +166,11 @@ $fxlt->assign('THIS_CATEGORY_ID', $cat);
 $fxlt->assign('SITE_NAME', cleanName($_MOO['site_name']));
 $fxlt->assign('PAGE_TITLE', cleanName($protos->getAlbumName()));
 
+/*
 // Assign the currently-viewed album a title
 $fxlt->assign('THIS_ALBUM_NAME', $protos->getAlbumName());
 $fxlt->assign('THIS_ALBUM_TITLE', cleanName($protos->getAlbumName()));
-
+*/
 
 /* Display template
 ---------------------------------------------------*/

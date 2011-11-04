@@ -15,7 +15,7 @@ $_MOO['images_per_row']   = 4;                      // Number of thumbnails per 
 $_MOO['pdf_thumb']        = "img/thumb_pdf.gif";    // Default thumbnail image for PDF files
 $_MOO['mov_thumb']        = "img/thumb_mov.gif";    // Default thumbnail image for MOV files
 $_MOO['xml_file']         = "images.xml";           // Location of images XML file
-
+$_MOO['album_path']       = "albums";               // Folder where you store your albums
 
 /*Do not edit below this line
 ---------------------------------------------------*/

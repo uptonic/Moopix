@@ -25,11 +25,45 @@
 </head>
 
 <body>
-  <!-- START album -->
-  <div class="album" style="width:200px;float:left;margin:10px;">
+  <!-- START menu -->
+  <div>
     <h3><a href="?alb={ALBUM_NAME}">{ALBUM_TITLE}</a></h3>
-    <p>{ALBUM_DESCRIPTION}</p>
   </div>
-  <!-- END album -->
+  <!-- END menu -->
+  
+  <div id="body-wrapper" class="container_12">
+		
+		<div id="title" class="grid_9">
+			<h2>Title will go here.</h2>
+		</div>
+		
+		<div class="clear"></div>
+		
+		<div class="grid_12">
+			<ul class="set_list">
+				<!-- START album -->
+				<li{SET_FIRST}>
+					<div class="image_wrapper">
+						<div class="side_title_wrapper">
+							<h4>{ALBUM_NAME}</h4>
+							<h5>{ALBUM_COUNT} items</h5>
+						</div>
+						
+						<a href="?alb={ALBUM_NAME}" title="{IMAGE_NAME}">
+						  <img src="{ALBUM_THUMB_SRC}" alt="" height="150" width="200" />
+						</a>
+					</div>
+				</li>
+				<!-- END album -->
+			</ul>
+		</div>
+		
+		<div class="clear"></div>
+		
+		<div class="grid_12" style="margin-top:30px">
+  	  <p style="font-size:11px;border-top:1px solid #ccc;padding-top:10px"><a id="publish_images" href="images.php">Publish Images...</a></p>
+  	</div>
+		
+	</div>
 </body>
 </html>
