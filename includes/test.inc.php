@@ -33,12 +33,6 @@
   
   <div id="body-wrapper" class="container_12">
 		
-		<div id="title" class="grid_9">
-			<h2>Title will go here.</h2>
-		</div>
-		
-		<div class="clear"></div>
-		
 		<div class="grid_12">
 			<ul class="set_list">
 				<!-- START album -->
