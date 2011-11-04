@@ -28,14 +28,15 @@ h2 span a:hover, h2 span a:visited:hover { text-decoration: underline; color: #c
 
 h4, h5 { text-align: center; }
 h4 { font-size: 11px; color: #000; padding-top: 10px; }
-h5 { font-weight: normal; font-size: 9px; color: #666; }
+h5 { font-weight: normal; font-size: 11px; color: #999; font-style: oblique; }
 
 img { border: none; display: block; }
 
 li { list-style: none; }
 
 #header {
-  height: 100px;
+  height: 125px;
+  background: transparent url('../img/tmp_escher.gif') no-repeat scroll top left;
 }
 
 #menu ul {
@@ -64,14 +65,19 @@ div.image_wrapper {
 	line-height: 15px;
 }
 
-div.image_wrapper > a > img {
-  margin-bottom: 10px;
-}
-
 div.image_wrapper > a {
   color: #000;
 	font-size: 11px;
 	font-weight: bold;
+}
+
+div.image_wrapper > a > div {
+  margin-bottom: 10px;
+}
+
+div.image_wrapper > a > div > img {
+  display: block;
+  margin: 0 auto;
 }
 
 /* overrides */

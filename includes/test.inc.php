@@ -39,7 +39,9 @@
 				<li{SET_FIRST}>
 					<div class="image_wrapper">						
 						<a href="?alb={ALBUM_NAME}" title="{IMAGE_NAME}">
-						  <img src="{ALBUM_THUMB_SRC}" alt="" height="{ALBUM_THUMB_HEIGHT}" width="{ALBUM_THUMB_WIDTH}" />
+						  <div style="height:{ALBUM_THUMB_HEIGHT}px;width:{ALBUM_THUMB_WIDTH}px;overflow:hidden;">
+						    <img src="{ALBUM_THUMB_SRC}" alt="" />
+						  </div>
 						  {ALBUM_TITLE}
 						</a>
 						

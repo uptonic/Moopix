@@ -18,7 +18,6 @@ $(function() {
 				
 	// Only load images in the viewport
 	$("img").lazyload({ 
-		placeholder : "img/loading_static.gif",
 		effect : "fadeIn"
 	});
 	
