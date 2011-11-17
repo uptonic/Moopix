@@ -34,7 +34,9 @@
 		<div class="clear"></div>
 		
 		<div id="albums" class="grid_9">
-			Images go here, yo!
+			<!-- START image -->
+      <p><img src="{IMAGE_SRC}" /></p>
+      <!-- END image -->
 		</div>
 		
 		<div id="menu" class="grid_3">

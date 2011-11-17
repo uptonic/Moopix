@@ -98,43 +98,37 @@ if($alb == NULL){
 	// Loop through images in this set
 	foreach($protos->getAlbumImages($alb) as $i => $image){
 		
-		// Break images to new row if max reached
-		//if($i%$config['images_per_row'] == 0) { $fxlt_image->assign('IMAGE_FIRST', ' class="first"'); }
-		
 		// Show title if available from the XML, otherwise just show the filename
 		$image_title = ($image->getAttribute('title')) ? $image->getAttribute('title') : $image->getAttribute('src');
     
     // Define the path to the image for display
 		$image_src =  $config['album_path'].'/'.$protos->getAlbumName().'/'.$image->getAttribute('src');
     
-    echo $image_src."<br />";
+    // Define other image attributes
+    //$fxlt_image->assign('IMAGE_WIDTH', $config['image_album_w']);
+		//$fxlt_image->assign('IMAGE_HEIGHT', $config['image_album_h']);
+    //$fxlt_image->assign('IMAGE_TITLE', $image_title);
+    //$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
+    $fxlt_image->assign('IMAGE_SRC', resize($image_src, $config['image_thumb_settings']));
     
     /*
-		// Define the path to the image for display
-		$image_src =  $protos->getBasePath().'/'.$protos->getSetName().'/'.$image->getAttribute('src');
+    // Treat PDFs a little differently, loading a blank image instead
+    if($image->getAttribute('data-extension') == "pdf") {
+      $fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
+    } else if($image->getAttribute('data-extension') == "mov"){
+      $fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
+      $fxlt_image->assign('IMAGE_REL', 'video');
+    } else {
+      $fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
+      $fxlt_image->assign('IMAGE_REL', 'lightbox');
+    }
+    */
 
-		// Define other image attributes
-		$fxlt_image->assign('IMAGE_TITLE', $image_title);
-		$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
-		$fxlt_image->assign('IMAGE_SRC', $image_src);
+    // Append image to page
+    $fxlt->assign('image', $fxlt_image);
 
-		// Treat PDFs a little differently, loading a blank image instead
-		if($image->getAttribute('data-extension') == "pdf") {
-			$fxlt_image->assign('IMAGE_THUMB_SRC', $pdf_thumb);
-		} else if($image->getAttribute('data-extension') == "mov"){
-			$fxlt_image->assign('IMAGE_THUMB_SRC', $mov_thumb);
-			$fxlt_image->assign('IMAGE_REL', 'video');
-		} else {
-			$fxlt_image->assign('IMAGE_THUMB_SRC', resize($image_src, $resize_settings));
-			$fxlt_image->assign('IMAGE_REL', 'lightbox');
-		}
-
-		// Append image to page
-		$fxlt->assign('image', $fxlt_image);
-
-		// Clear the buffer
-	  $fxlt_image->clear();
-	  */
+    // Clear the buffer
+    $fxlt_image->clear();
 	}
 }
 
