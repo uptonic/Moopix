@@ -31,8 +31,9 @@ $config['image_thumb_settings'] = array(
 );
 
 // Album image resize settings
-$config['image_thumb_settings'] = array(
-  'w'     => $config['image_thumb_w']
+$config['image_album_settings'] = array(
+  'w'     => $config['image_album_w'],
+  'scale' => false,
 );
 
 // Get params from query string

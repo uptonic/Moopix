@@ -109,7 +109,7 @@ if($alb == NULL){
 		//$fxlt_image->assign('IMAGE_HEIGHT', $config['image_album_h']);
     //$fxlt_image->assign('IMAGE_TITLE', $image_title);
     //$fxlt_image->assign('IMAGE_MODIFIED', _ago($image->getAttribute('data-last-modified')));
-    $fxlt_image->assign('IMAGE_SRC', resize($image_src, $config['image_thumb_settings']));
+    $fxlt_image->assign('IMAGE_SRC', resize($image_src, $config['image_album_settings']));
     
     /*
     // Treat PDFs a little differently, loading a blank image instead
