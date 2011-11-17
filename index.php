@@ -76,12 +76,12 @@ if($alb == NULL){
 		} else if ($t->item(0)->getAttribute('data-extension') == "mov") {
 			$fxlt_album->assign('ALBUM_THUMB_SRC', $config['mov_thumb']);
 		} else {
-			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $config['resize_settings']));
+			$fxlt_album->assign('ALBUM_THUMB_SRC', resize($thumb_src, $config['image_thumb_settings']));
 		}	
 		
 		// Assign the name for this set
-		$fxlt_album->assign('ALBUM_THUMB_HEIGHT', $config['resize_h']);
-		$fxlt_album->assign('ALBUM_THUMB_WIDTH', $config['resize_w']);
+		$fxlt_album->assign('ALBUM_THUMB_WIDTH', $config['image_thumb_w']);
+		$fxlt_album->assign('ALBUM_THUMB_HEIGHT', $config['image_thumb_h']);
 		$fxlt_album->assign('ALBUM_NAME', $album->getAttribute('name'));
   	$fxlt_album->assign('ALBUM_TITLE', cleanName($album->getAttribute('name')));
 		$fxlt_album->assign('ALBUM_MODIFIED', _ago($album->getAttribute('data-last-modified')));
