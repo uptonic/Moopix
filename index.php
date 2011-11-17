@@ -23,8 +23,7 @@ $protos = new Protos($config['xml_file'], $alb);
 ---------------------------------------------------*/
 
 // Set the template file for this view
-//$templateFile = ($alb == NULL ? 'includes/index.inc.php' : 'includes/album.inc.php');
-$templateFile = 'includes/test.inc.php';
+$templateFile = ($alb == NULL ? 'includes/index.inc.php' : 'includes/album.inc.php');
 
 // New template instance
 $fxlt = new fxl_template($templateFile);
