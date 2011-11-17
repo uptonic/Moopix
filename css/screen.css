@@ -48,6 +48,10 @@ li { list-style: none; }
   padding-bottom: 9px;
 }
 
+#menu li.index {
+  padding-top: 18px;
+}
+
 #menu li a {
   padding: 2px 3px 2px 3px;
 }

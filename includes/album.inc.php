@@ -44,6 +44,7 @@
 		    <!-- START menu -->
         <li><a href="?alb={ALBUM_NAME}"{ALBUM_SELECTED}>{ALBUM_TITLE}</a></li>
         <!-- END menu -->
+        <li class="index"><a href="#">Index</a></li>
 		  </ul>
 		</div>
 		
